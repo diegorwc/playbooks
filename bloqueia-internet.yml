@@ -1,0 +1,12 @@
+- name: Bloqueia internet pelo firewall do windows
+  hosts: "{{lab}}"
+  tasks:
+    - name: Enable firewall for Domain profile and block outbound connections
+      community.windows.win_firewall:
+        profiles:
+        - Domain
+        - Private
+        - Public
+        state: enabled
+        outbound_action: allow
+      tags: block_connection
